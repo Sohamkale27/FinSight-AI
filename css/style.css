@@ -15,6 +15,27 @@ body {
     font-size: 22px;
     font-weight: bold;
 }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-circle {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #00c896, #00a67d);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 200, 150, 0.4);
+}
+
 
 .container {
     max-width: 900px;
@@ -74,4 +95,9 @@ body {
     border-radius: 4px;
     color: white;
     cursor: pointer;
+    .logo-circle:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease;
+}
+
 }
