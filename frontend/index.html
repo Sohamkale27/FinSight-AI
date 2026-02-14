@@ -13,20 +13,28 @@
 
     <div class="container">
 
-        <div class="card input-card">
+        <!-- Income Card -->
+        <div class="card income-card">
+            <h2>Monthly Income</h2>
+            <input type="number" id="incomeInput" placeholder="Enter Income">
+            <button id="setIncomeBtn">Set Income</button>
+        </div>
+
+        <!-- Summary Card -->
+        <div class="card summary-card">
+            <h2>Financial Summary</h2>
+            <p>Total Expense: ₹ <span id="totalExpense">0</span></p>
+            <p>Remaining Balance: ₹ <span id="balance">0</span></p>
+            <p>Savings Rate: <span id="savingsRate">0</span>%</p>
+        </div>
+
+        <!-- Expense Card -->
+        <div class="card expense-card">
             <h2>Add Expense</h2>
             <input type="text" id="expenseName" placeholder="Expense Name">
             <input type="number" id="expenseAmount" placeholder="Amount">
             <button id="addExpenseBtn">Add Expense</button>
-        </div>
 
-        <div class="card summary-card">
-            <h2>Total Expense</h2>
-            <h1>₹ <span id="totalAmount">0</span></h1>
-        </div>
-
-        <div class="card list-card">
-            <h2>Expense History</h2>
             <ul id="expenseList"></ul>
         </div>
 

@@ -1,21 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    const incomeInput = document.getElementById("incomeInput");
+    const setIncomeBtn = document.getElementById("setIncomeBtn");
+
     const expenseNameInput = document.getElementById("expenseName");
     const expenseAmountInput = document.getElementById("expenseAmount");
     const addExpenseBtn = document.getElementById("addExpenseBtn");
-    const expenseList = document.getElementById("expenseList");
-    const totalAmountDisplay = document.getElementById("totalAmount");
 
-    // Load expenses from localStorage
+    const expenseList = document.getElementById("expenseList");
+
+    const totalExpenseDisplay = document.getElementById("totalExpense");
+    const balanceDisplay = document.getElementById("balance");
+    const savingsRateDisplay = document.getElementById("savingsRate");
+
+    let income = parseFloat(localStorage.getItem("income")) || 0;
     let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
-    function saveToLocalStorage() {
+    function saveData() {
+        localStorage.setItem("income", income);
         localStorage.setItem("expenses", JSON.stringify(expenses));
     }
 
-    function updateTotal() {
-        const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-        totalAmountDisplay.textContent = total;
+    function calculateTotalExpense() {
+        return expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    }
+
+    function updateSummary() {
+        const totalExpense = calculateTotalExpense();
+        const balance = income - totalExpense;
+        const savingsRate = income > 0 ? ((balance / income) * 100).toFixed(1) : 0;
+
+        totalExpenseDisplay.textContent = totalExpense;
+        balanceDisplay.textContent = balance;
+        savingsRateDisplay.textContent = savingsRate;
     }
 
     function renderExpenses() {
@@ -34,21 +51,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    addExpenseBtn.addEventListener("click", function () {
+    setIncomeBtn.addEventListener("click", function () {
+        income = parseFloat(incomeInput.value);
 
+        if (isNaN(income) || income <= 0) {
+            alert("Enter valid income");
+            return;
+        }
+
+        saveData();
+        updateSummary();
+        incomeInput.value = "";
+    });
+
+    addExpenseBtn.addEventListener("click", function () {
         const name = expenseNameInput.value.trim();
         const amount = parseFloat(expenseAmountInput.value);
 
         if (name === "" || isNaN(amount)) {
-            alert("Enter valid details");
+            alert("Enter valid expense details");
             return;
         }
 
         expenses.push({ name, amount });
 
-        saveToLocalStorage();
+        saveData();
         renderExpenses();
-        updateTotal();
+        updateSummary();
 
         expenseNameInput.value = "";
         expenseAmountInput.value = "";
@@ -60,14 +89,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             expenses.splice(index, 1);
 
-            saveToLocalStorage();
+            saveData();
             renderExpenses();
-            updateTotal();
+            updateSummary();
         }
     });
 
-    // Initial render on page load
     renderExpenses();
-    updateTotal();
+    updateSummary();
 
 });
