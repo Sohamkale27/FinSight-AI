@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const expenseList = document.getElementById("expenseList");
     const totalAmountDisplay = document.getElementById("totalAmount");
 
-    let expenses = [];
+    // Load expenses from localStorage
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+    function saveToLocalStorage() {
+        localStorage.setItem("expenses", JSON.stringify(expenses));
+    }
 
     function updateTotal() {
         const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
@@ -41,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         expenses.push({ name, amount });
 
+        saveToLocalStorage();
         renderExpenses();
         updateTotal();
 
@@ -51,10 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
     expenseList.addEventListener("click", function (e) {
         if (e.target.classList.contains("delete-btn")) {
             const index = e.target.getAttribute("data-index");
+
             expenses.splice(index, 1);
+
+            saveToLocalStorage();
             renderExpenses();
             updateTotal();
         }
     });
+
+    // Initial render on page load
+    renderExpenses();
+    updateTotal();
 
 });
