@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FinSight AI – Financial Insights Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-circle">FA</div>
+                <div>
+                    <div class="brand-title">FinSight AI</div>
+                    <div class="brand-subtitle">Smart finance insights</div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item nav-item-active">
+                    <span class="nav-dot"></span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-dot"></span>
+                    <span>Transactions</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-dot"></span>
+                    <span>Insights</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-dot"></span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-plan-pill">Starter workspace</div>
+            </div>
+        </aside>
+
+        <!-- Main content area -->
+        <div class="main">
+            <!-- Top header -->
+            <header class="topbar">
+                <div>
+                    <h1 class="page-title">Overview</h1>
+                    <p class="page-subtitle">High-level view of your cashflow and spending.</p>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn btn-ghost">+ Add transaction</button>
+                    <div class="user-pill">
+                        <span class="user-avatar">O</span>
+                        <div class="user-meta">
+                            <span class="user-name">Demo User</span>
+                            <span class="user-role">Individual plan</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="content">
+                <!-- Summary cards -->
+                <section class="card-grid" aria-label="Financial summary">
+                    <article class="card summary-card">
+                        <div class="card-label">Total Balance</div>
+                        <div id="summary-balance" class="card-value">₹0</div>
+                        <div class="card-helper">Across all accounts</div>
+                    </article>
+                    <article class="card summary-card">
+                        <div class="card-label">Total Income (sample)</div>
+                        <div id="summary-income" class="card-value">₹0</div>
+                        <div class="card-helper">This period</div>
+                    </article>
+                    <article class="card summary-card">
+                        <div class="card-label">Total Expenses (sample)</div>
+                        <div id="summary-expenses" class="card-value">₹0</div>
+                        <div class="card-helper">This period</div>
+                    </article>
+                </section>
+
+                <!-- Transactions and activity -->
+                <section class="layout-two-column">
+                    <article class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Recent transactions</h2>
+                                <p class="card-subtitle">Based on sample data. Backend API coming next.</p>
+                            </div>
+                            <div class="chip chip-pill">Sample data</div>
+                        </div>
+                        <ul id="transaction-list" class="transaction-list" aria-label="Recent transactions">
+                            <!-- Filled by app.js -->
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Import & automation</h2>
+                                <p class="card-subtitle">Soon you'll connect banks, upload CSVs, and let FinSight AI do the rest.</p>
+                            </div>
+                        </div>
+                        <div class="import-section">
+                            <button class="btn">Connect bank (coming soon)</button>
+                            <p class="import-hint">Phase 2 will introduce CSV uploads and real data ingestion.</p>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Legacy summary anchor for JS compatibility -->
+                <div id="summary" class="visually-hidden"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ORDER IS IMPORTANT -->
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
