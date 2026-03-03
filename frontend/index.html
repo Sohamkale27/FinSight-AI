@@ -1,123 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>FinSight AI – Financial Insights Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSight AI - Smart Dashboard</title>
+    <!-- Google Fonts for Modern SaaS Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <div class="app-shell">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <div class="logo-circle">FA</div>
-                <div>
-                    <div class="brand-title">FinSight AI</div>
-                    <div class="brand-subtitle">Smart finance insights</div>
-                </div>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item nav-item-active">
-                    <span class="nav-dot"></span>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-dot"></span>
-                    <span>Transactions</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-dot"></span>
-                    <span>Insights</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-dot"></span>
-                    <span>Settings</span>
-                </a>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="sidebar-plan-pill">Starter workspace</div>
-            </div>
-        </aside>
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast hidden"></div>
 
-        <!-- Main content area -->
-        <div class="main">
-            <!-- Top header -->
-            <header class="topbar">
-                <div>
-                    <h1 class="page-title">Overview</h1>
-                    <p class="page-subtitle">High-level view of your cashflow and spending.</p>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>FinSight AI</h1>
+                <p>Smart Financial Intelligence</p>
+            </div>
+            <div class="header-decoration">
+                <div class="glow-orb"></div>
+            </div>
+        </header>
+
+        <section class="summary-grid">
+            <div class="card summary-card balance-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                        <path d="M12 12h.01"></path>
+                        <path d="M17 12h.01"></path>
+                        <path d="M7 12h.01"></path>
+                    </svg>
                 </div>
-                <div class="topbar-right">
-                    <button class="btn btn-ghost">+ Add transaction</button>
-                    <div class="user-pill">
-                        <span class="user-avatar">O</span>
-                        <div class="user-meta">
-                            <span class="user-name">Demo User</span>
-                            <span class="user-role">Individual plan</span>
-                        </div>
+                <div>
+                    <h3>Total Balance</h3>
+                    <p id="balance" class="amount">₹0</p>
+                </div>
+            </div>
+
+            <div class="card summary-card income-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19V5"></path>
+                        <path d="M5 12l7-7 7 7"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Income</h3>
+                    <p id="income" class="amount text-green">₹0</p>
+                </div>
+            </div>
+
+            <div class="card summary-card expense-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14"></path>
+                        <path d="M19 12l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Expenses</h3>
+                    <p id="expense" class="amount text-red">₹0</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <section class="card form-card glass-panel">
+                <div class="card-header">
+                    <h2>New Transaction</h2>
+                    <p class="subtitle">Enter your financial activity below</p>
+                </div>
+                <form id="transaction-form">
+                    <div class="form-group">
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" id="amount" placeholder="e.g. 1500" required min="1" step="any" />
                     </div>
+
+                    <div class="form-group">
+                        <label for="type">Transaction Type</label>
+                        <select id="type" required>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" placeholder="e.g. Groceries, Salary" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" placeholder="Brief details about this transaction"
+                            required />
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="primary-btn">
+                        <span class="btn-text">Add Transaction</span>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </form>
+            </section>
+
+            <section class="card list-card glass-panel">
+                <div class="card-header flex-between">
+                    <h2>Recent Transactions</h2>
+                    <span class="badge" id="transaction-count">0 Records</span>
                 </div>
-            </header>
 
-            <main class="content">
-                <!-- Summary cards -->
-                <section class="card-grid" aria-label="Financial summary">
-                    <article class="card summary-card">
-                        <div class="card-label">Total Balance</div>
-                        <div id="summary-balance" class="card-value">₹0</div>
-                        <div class="card-helper">Across all accounts</div>
-                    </article>
-                    <article class="card summary-card">
-                        <div class="card-label">Total Income (sample)</div>
-                        <div id="summary-income" class="card-value">₹0</div>
-                        <div class="card-helper">This period</div>
-                    </article>
-                    <article class="card summary-card">
-                        <div class="card-label">Total Expenses (sample)</div>
-                        <div id="summary-expenses" class="card-value">₹0</div>
-                        <div class="card-helper">This period</div>
-                    </article>
-                </section>
+                <div id="empty-state" class="empty-state hidden">
+                    <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <p>No transactions found.</p>
+                    <span class="empty-subtext">Add your first transaction using the form.</span>
+                </div>
 
-                <!-- Transactions and activity -->
-                <section class="layout-two-column">
-                    <article class="card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Recent transactions</h2>
-                                <p class="card-subtitle">Based on sample data. Backend API coming next.</p>
-                            </div>
-                            <div class="chip chip-pill">Sample data</div>
-                        </div>
-                        <ul id="transaction-list" class="transaction-list" aria-label="Recent transactions">
-                            <!-- Filled by app.js -->
-                        </ul>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Import & automation</h2>
-                                <p class="card-subtitle">Soon you'll connect banks, upload CSVs, and let FinSight AI do the rest.</p>
-                            </div>
-                        </div>
-                        <div class="import-section">
-                            <button class="btn">Connect bank (coming soon)</button>
-                            <p class="import-hint">Phase 2 will introduce CSV uploads and real data ingestion.</p>
-                        </div>
-                    </article>
-                </section>
-
-                <!-- Legacy summary anchor for JS compatibility -->
-                <div id="summary" class="visually-hidden"></div>
-            </main>
+                <ul id="transaction-list" class="transaction-list"></ul>
+            </section>
         </div>
+
     </div>
 
-    <!-- ORDER IS IMPORTANT -->
-    <script src="js/data.js"></script>
-    <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
