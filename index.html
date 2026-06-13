@@ -1,135 +1,274 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinSight AI - Smart Dashboard</title>
-    <!-- Google Fonts for Modern SaaS Look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- Toast Notification Container -->
-    <div id="toast" class="toast hidden"></div>
+    <div class="page-glow page-glow-one"></div>
+    <div class="page-glow page-glow-two"></div>
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-    <div class="container">
-        <header>
-            <div class="header-content">
+    <div class="app-shell">
+        <header class="hero-section glass-panel">
+            <div class="hero-copy">
+                <div class="eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    Premium finance intelligence
+                </div>
                 <h1>FinSight AI</h1>
-                <p>Smart Financial Intelligence</p>
+                <p class="hero-text">Track cash flow, monitor spending, and surface financial momentum in a dashboard built for crisp decision-making.</p>
+                <div class="hero-meta">
+                    <div class="hero-chip">
+                        <span class="chip-label">Workspace</span>
+                        <span class="chip-value">Personal Ledger</span>
+                    </div>
+                    <div class="hero-chip">
+                        <span class="chip-label">Status</span>
+                        <span class="chip-value status-live">Live sync</span>
+                    </div>
+                </div>
             </div>
-            <div class="header-decoration">
-                <div class="glow-orb"></div>
+
+            <div class="hero-spotlight glass-panel">
+                <span class="spotlight-label">Financial pulse</span>
+                <strong>See balance shifts instantly</strong>
+                <p>Every transaction updates your overview, so the dashboard stays focused on what changed most recently.</p>
             </div>
         </header>
 
-        <section class="summary-grid">
-            <div class="card summary-card balance-card">
-                <div class="card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
-                        <path d="M12 12h.01"></path>
-                        <path d="M17 12h.01"></path>
-                        <path d="M7 12h.01"></path>
-                    </svg>
+        <section class="summary-grid" aria-label="Financial summary">
+            <article class="card summary-card balance-card glass-panel">
+                <div class="summary-icon-wrap">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="20" height="12" rx="3"></rect>
+                            <path d="M7 12h10"></path>
+                            <path d="M16.5 9.5h.01"></path>
+                        </svg>
+                    </div>
+                    <span class="summary-trend neutral">Net overview</span>
                 </div>
-                <div>
-                    <h3>Total Balance</h3>
-                    <p id="balance" class="amount">₹0</p>
+                <div class="summary-content">
+                    <p class="summary-label">Total Balance</p>
+                    <p id="balance" class="amount">&#8377;0</p>
+                    <span class="summary-note">Real-time position across all entries</span>
                 </div>
-            </div>
+            </article>
 
-            <div class="card summary-card income-card">
-                <div class="card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 19V5"></path>
-                        <path d="M5 12l7-7 7 7"></path>
-                    </svg>
+            <article class="card summary-card income-card glass-panel">
+                <div class="summary-icon-wrap">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 19V5"></path>
+                            <path d="M5 12l7-7 7 7"></path>
+                        </svg>
+                    </div>
+                    <span class="summary-trend positive">Cash in</span>
                 </div>
-                <div>
-                    <h3>Income</h3>
-                    <p id="income" class="amount text-green">₹0</p>
+                <div class="summary-content">
+                    <p class="summary-label">Income</p>
+                    <p id="income" class="amount text-green">&#8377;0</p>
+                    <span class="summary-note">All credited transactions</span>
                 </div>
-            </div>
+            </article>
 
-            <div class="card summary-card expense-card">
-                <div class="card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 5v14"></path>
-                        <path d="M19 12l-7 7-7-7"></path>
-                    </svg>
+            <article class="card summary-card expense-card glass-panel">
+                <div class="summary-icon-wrap">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14"></path>
+                            <path d="M19 12l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <span class="summary-trend negative">Cash out</span>
                 </div>
-                <div>
-                    <h3>Expenses</h3>
-                    <p id="expense" class="amount text-red">₹0</p>
+                <div class="summary-content">
+                    <p class="summary-label">Expenses</p>
+                    <p id="expense" class="amount text-red">&#8377;0</p>
+                    <span class="summary-note">All outgoing transactions</span>
                 </div>
-            </div>
+            </article>
         </section>
 
-        <div class="main-content">
+        <main class="dashboard-grid">
             <section class="card form-card glass-panel">
                 <div class="card-header">
-                    <h2>New Transaction</h2>
-                    <p class="subtitle">Enter your financial activity below</p>
+                    <div>
+                        <span class="section-kicker">Transaction form</span>
+                        <h2>Capture a new movement</h2>
+                    </div>
+                    <p class="subtitle">Add income or expenses with polished input states and instant feedback.</p>
                 </div>
+
                 <form id="transaction-form">
-                    <div class="form-group">
-                        <label for="amount">Amount (₹)</label>
-                        <input type="number" id="amount" placeholder="e.g. 1500" required min="1" step="any" />
-                    </div>
+                    <div class="form-grid">
+                        <div class="field-group span-2">
+                            <label for="amount">Amount</label>
+                            <div class="input-shell currency-shell">
+                                <span class="input-prefix">&#8377;</span>
+                                <input type="number" id="amount" placeholder="0" required min="1" step="any" />
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="type">Transaction Type</label>
-                        <select id="type" required>
-                            <option value="income">Income</option>
-                            <option value="expense">Expense</option>
-                        </select>
-                    </div>
+                        <div class="field-group">
+                            <label for="type">Transaction Type</label>
+                            <div class="input-shell select-shell">
+                                <select id="type" required>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <input type="text" id="category" placeholder="e.g. Groceries, Salary" required />
-                    </div>
+                        <div class="field-group">
+                            <label for="category">Category</label>
+                            <div class="input-shell">
+                                <input type="text" id="category" placeholder="Salary, Groceries, Rent" required />
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <input type="text" id="description" placeholder="Brief details about this transaction"
-                            required />
+                        <div class="field-group span-2">
+                            <label for="description">Description</label>
+                            <div class="input-shell">
+                                <input type="text" id="description" placeholder="Brief details about this transaction" required />
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" id="submit-btn" class="primary-btn">
+                        <span class="btn-glow"></span>
                         <span class="btn-text">Add Transaction</span>
-                        <div class="spinner hidden"></div>
+                        <span class="spinner hidden" aria-hidden="true"></span>
                     </button>
                 </form>
             </section>
 
             <section class="card list-card glass-panel">
-                <div class="card-header flex-between">
-                    <h2>Recent Transactions</h2>
+                <div class="card-header list-header">
+                    <div>
+                        <span class="section-kicker">Ledger activity</span>
+                        <h2>Recent transactions</h2>
+                    </div>
                     <span class="badge" id="transaction-count">0 Records</span>
                 </div>
 
                 <div id="empty-state" class="empty-state hidden">
-                    <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
-                    <p>No transactions found.</p>
-                    <span class="empty-subtext">Add your first transaction using the form.</span>
+                    <div class="empty-state-icon">
+                        <svg class="empty-icon" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v18"></path>
+                            <path d="M3 12h18"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                        </svg>
+                    </div>
+                    <p>No transactions yet</p>
+                    <span class="empty-subtext">Your ledger will appear here as soon as you add the first entry.</span>
                 </div>
 
                 <ul id="transaction-list" class="transaction-list"></ul>
             </section>
-        </div>
+        </main>
 
+        <section class="analytics-section" aria-label="Advanced analytics">
+            <div class="card-header analytics-header">
+                <div>
+                    <span class="section-kicker">Advanced analytics</span>
+                    <h2>Insight engine</h2>
+                </div>
+                <p class="subtitle">Calculated from the authenticated user&apos;s transactions only.</p>
+            </div>
+
+            <section class="analytics-metrics" aria-label="Analytics summary metrics">
+                <article class="card metric-card glass-panel">
+                    <span class="metric-label">Total Income</span>
+                    <strong id="analytics-total-income" class="metric-value text-green">&#8377;0</strong>
+                    <span id="analytics-total-income-note" class="metric-note">All credited transactions</span>
+                </article>
+                <article class="card metric-card glass-panel">
+                    <span class="metric-label">Total Expenses</span>
+                    <strong id="analytics-total-expenses" class="metric-value text-red">&#8377;0</strong>
+                    <span id="analytics-total-expenses-note" class="metric-note">All outgoing transactions</span>
+                </article>
+                <article class="card metric-card glass-panel">
+                    <span class="metric-label">Net Balance</span>
+                    <strong id="analytics-net-balance" class="metric-value">&#8377;0</strong>
+                    <span id="analytics-net-balance-note" class="metric-note">Income minus expenses</span>
+                </article>
+                <article class="card metric-card glass-panel">
+                    <span class="metric-label">Savings Rate</span>
+                    <strong id="analytics-savings-rate" class="metric-value">0%</strong>
+                    <span id="analytics-savings-rate-note" class="metric-note">Ratio of balance to income</span>
+                </article>
+                <article class="card metric-card glass-panel">
+                    <span class="metric-label">Monthly Cash Flow</span>
+                    <strong id="analytics-monthly-cash-flow" class="metric-value">&#8377;0</strong>
+                    <span id="analytics-monthly-cash-flow-note" class="metric-note">Current month income minus spending</span>
+                </article>
+            </section>
+
+            <section class="analytics-charts">
+                <article class="card chart-card glass-panel">
+                    <div class="card-header chart-header">
+                        <div>
+                            <span class="section-kicker">Expense by category</span>
+                            <h3>Spending concentration</h3>
+                        </div>
+                        <p class="subtitle">Hover the chart to inspect category share.</p>
+                    </div>
+                    <div class="chart-frame">
+                        <div id="expense-category-chart" class="chart-canvas" aria-label="Expense by category chart"></div>
+                        <div id="expense-category-legend" class="chart-legend" aria-hidden="true"></div>
+                    </div>
+                </article>
+
+                <article class="card chart-card glass-panel">
+                    <div class="card-header chart-header">
+                        <div>
+                            <span class="section-kicker">Income vs expense</span>
+                            <h3>Monthly comparison</h3>
+                        </div>
+                        <p class="subtitle">Bar heights compare cash in and cash out over the last six months.</p>
+                    </div>
+                    <div class="chart-frame">
+                        <div id="income-expense-chart" class="chart-canvas" aria-label="Income and expense chart"></div>
+                        <div id="income-expense-legend" class="chart-legend" aria-hidden="true"></div>
+                    </div>
+                </article>
+
+                <article class="card chart-card glass-panel">
+                    <div class="card-header chart-header">
+                        <div>
+                            <span class="section-kicker">Monthly spending trend</span>
+                            <h3>Expense trajectory</h3>
+                        </div>
+                        <p class="subtitle">The line shows expense momentum across the last six months.</p>
+                    </div>
+                    <div class="chart-frame">
+                        <div id="monthly-spending-chart" class="chart-canvas" aria-label="Monthly spending trend chart"></div>
+                        <div id="monthly-spending-legend" class="chart-legend" aria-hidden="true"></div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="card insights-card glass-panel">
+                <div class="card-header insights-header">
+                    <div>
+                        <span class="section-kicker">AI financial insights</span>
+                        <h3>Generated from transaction analysis</h3>
+                    </div>
+                    <p class="subtitle">No external AI API is used. These insights are derived locally from your ledger.</p>
+                </div>
+                <ul id="analytics-insights" class="insights-list"></ul>
+            </section>
+        </section>
     </div>
 
     <script src="js/app.js"></script>
