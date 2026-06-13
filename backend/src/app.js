@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const transactionRoutes = require("./routes/transactions");
+const analyticsRoutes = require("./routes/analytics");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/health", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found." });
